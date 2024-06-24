@@ -5,10 +5,12 @@ This guide outlines the steps to install FreeSWITCH on Ubuntu 22.04 LTS. FreeSWI
 
 Installation Steps
 
-Step 1: Install FreeSWITCH Dependencies
+###Step 1: Install FreeSWITCH Dependencies
+
 apt install --yes build-essential pkg-config uuid-dev zlib1g-dev libjpeg-dev libsqlite3-dev libcurl4-openssl-dev libpcre3-dev libspeexdsp-dev libldns-dev libedit-dev libtiff5-dev yasm libopus-dev libsndfile1-dev unzip libavformat-dev libswscale-dev liblua5.2-dev liblua5.2-0 cmake libpq-dev unixodbc-dev autoconf automake ntpdate libxml2-dev libpq-dev libpq5 sngrep lua5.2 lua5.2-doc libreadline-dev
 
-Step 2: Configure Timezone
+###Step 2: Configure Timezone
+
 To configure the timezone, run:
 dpkg-reconfigure tzdata
 
@@ -18,7 +20,8 @@ crontab -e
 Add the following line to run the ntpdate command every 30 minutes:
 */30 * * * * ntpdate #Enter your IP Here
 
-Step 3: Install libspandsp3
+###Step 3: Install libspandsp3
+
 Clone the spandsp repository:
 git clone https://github.com/freeswitch/spandsp.git
 
@@ -28,7 +31,8 @@ cd spandsp/
 Run the bootstrap, configure, make, and install commands:
 ./bootstrap.sh && ./configure && make && make install
 
-Step 4: Install sofia-sip
+###Step 4: Install sofia-sip
+
 Download the sofia-sip repository:
 cd /usr/local/src/
 wget "https://github.com/freeswitch/sofia-sip/archive/master.tar.gz" -O sofia-sip.tar.gz
@@ -42,7 +46,8 @@ cd sofia-sip-master
 Run the bootstrap, configure, make, and install commands:
 ./bootstrap.sh && ./configure && make && make install
 
-Step 5: Download FreeSWITCH
+###Step 5: Download FreeSWITCH
+
 Download the FreeSWITCH source:
 cd /usr/local/src/
 wget https://files.freeswitch.org/releases/freeswitch/freeswitch-1.10.10.-release.tar.gz
@@ -50,14 +55,16 @@ wget https://files.freeswitch.org/releases/freeswitch/freeswitch-1.10.10.-releas
 Extract the downloaded tarball:
 tar -zxvf freeswitch-1.10.10.-release.tar.gz
 
-Step 6: Install Lua Module
+###Step 6: Install Lua Module
+
 Copy Lua headers:
 cp /usr/include/lua5.2/*.h  /usr/local/src/freeswitch-1.10.10.-release/src/mod/languages/mod_lua/
 
 Create a symbolic link for Lua:
 sudo ln -s /usr/lib/x86_64-linux-gnu/liblua5.2.so /usr/lib/x86_64-linux-gnu/liblua.so
 
-Step 7: FreeSWITCH Installation
+###Step 7: FreeSWITCH Installation
+
 Navigate to the FreeSWITCH source directory:
 cd freeswitch-1.10.10.-release
 
@@ -76,13 +83,15 @@ Install CD Sounds and Music:
 make cd-sounds-install
 make cd-moh-install
 
-Step 8: Configure FreeSWITCH
+###Step 8: Configure FreeSWITCH
+
 Create softlinks and paths:
 ln -s /usr/local/freeswitch/conf /etc/freeswitch
 ln -s /usr/local/freeswitch/bin/fs_cli /usr/bin/fs_cli
 ln -s /usr/local/freeswitch/bin/freeswitch /usr/sbin/freeswitch
 
-Step 9: Add Non-Root User for FreeSWITCH
+###Step 9: Add Non-Root User for FreeSWITCH
+
 Add the freeswitch group:
 groupadd freeswitch
 
@@ -94,7 +103,8 @@ chown -R freeswitch:freeswitch /usr/local/freeswitch/
 chmod -R ug=rwX,o= /usr/local/freeswitch/
 chmod -R u=rwx,g=rx /usr/local/freeswitch/bin/*
 
-Step 10: Set Up Systemd Service
+###Step 10: Set Up Systemd Service
+
 Open /etc/systemd/system/freeswitch.service in your favorite editor and paste the following contents:
 
 [Unit]

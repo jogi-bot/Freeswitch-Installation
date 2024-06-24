@@ -131,16 +131,16 @@ WantedBy=multi-user.target
 
 
 Reload the systemd daemon:
-systemctl daemon-reload
+- systemctl daemon-reload
 
 Enable the FreeSWITCH service to start on boot:
-systemctl enable freeswitch.service
+- systemctl enable freeswitch.service
 
 Start the FreeSWITCH daemon:
-systemctl start freeswitch.service
+- systemctl start freeswitch.service
 
 Check if the daemon is loaded successfully:
-systemctl status freeswitch.service
+- systemctl status freeswitch.service
 
 If the daemon is not started, run:
-ldconfig
+- ldconfig
